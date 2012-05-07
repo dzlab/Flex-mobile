@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+							xmlns:s="library://ns.adobe.com/flex/spark" 
+							firstView="views.ListView"
+							creationComplete="initApp(event)"
+							>
+	<fx:Script>
+		<![CDATA[
+			import domain.Model;
+			
+			import mx.events.FlexEvent;
+			
+			protected function initApp(event:FlexEvent):void
+			{
+				// init transition mode between views
+				navigator.defaultPushTransition = up;
+				navigator.defaultPopTransition = down;
+				
+				// load contacts
+				Model.getModel().loadContacts();
+			}
+			
+		]]>
+	</fx:Script>
+	
+
+	<fx:Declarations>
+		<s:SlideViewTransition id="up" direction="up" transitionControlsWithContent="true" mode="cover" />
+		<s:SlideViewTransition id="down" direction="down" transitionControlsWithContent="true" />
+	</fx:Declarations>
+	
+	
+</s:ViewNavigatorApplication>

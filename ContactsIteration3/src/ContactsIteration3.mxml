@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+							xmlns:s="library://ns.adobe.com/flex/spark" 
+							firstView="contacts.presentation.ListView"
+							creationComplete="initApp(event)" xmlns:parsley="http://www.spicefactory.org/parsley">
+	<fx:Script>
+		<![CDATA[
+			import contacts.application.AllContactsMessage;
+			
+			import mx.events.FlexEvent;
+			
+			protected function initApp(event:FlexEvent):void
+			{
+				//Model.getModel().loadContacts();
+				NativeApplication.nativeApplication.addEventListener(Event.EXITING, onExit);
+			}
+			
+			private function onExit(event:Event):void
+			{
+				
+			}
+			
+			[MessageDispatcher]
+			public var dispatcher:Function;
+			
+			[Init]
+			public function contextInitialized():void
+			{
+				dispatcher(new AllContactsMessage());
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		
+		<parsley:ContextBuilder config="{ContactsContext}" />
+		<parsley:Configure />
+		
+	</fx:Declarations>
+
+</s:ViewNavigatorApplication>

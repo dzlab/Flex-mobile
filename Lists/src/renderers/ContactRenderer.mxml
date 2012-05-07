@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:IconItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark"  
+					labelFunction="fullName" messageField="title" 
+					iconField="photo" iconWidth="60" iconHeight="60"  
+					decorator="@Embed('assets/arrow.png')"
+					creationComplete="incrementCount(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			public function fullName(item:Object):String
+			{
+				return item.firstname + " " + item.lastname;
+			}
+			
+			private static var counter:int = 0;
+			
+			protected function incrementCount(event:FlexEvent):void
+			{
+				trace("Instance num: " + ++counter);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+</s:IconItemRenderer>

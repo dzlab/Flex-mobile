@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="GeoLocation"
+		viewActivate="registerGeoLocation(event)">
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" paddingTop="15" gap="15"/>
+	</s:layout>	
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.sensors.Geolocation;
+			
+			import spark.events.ViewNavigatorEvent;
+
+			private var geolocation:Geolocation;
+			
+			protected function registerGeoLocation(event:ViewNavigatorEvent):void
+			{
+				if (Geolocation.isSupported) 
+				{
+					supportedLabel.text = "GeoLocation supported";
+					geolocation = new Geolocation();
+					geolocation.addEventListener(GeolocationEvent.UPDATE, onTravel);
+				}
+				else
+					supportedLabel.text = "GeoLocation not supported";
+			}
+
+			private function onTravel(event:GeolocationEvent):void 
+			{
+				trace(event.latitude);
+				trace(event.longitude);
+				latLabel.text = String(event.latitude);
+				longLabel.text = String(event.longitude);
+			}						
+			
+			
+		]]>
+	</fx:Script>
+	
+	<s:Label id="supportedLabel" />
+	<s:Label id="latLabel" />
+	<s:Label id="longLabel" />
+	
+	
+</s:View>

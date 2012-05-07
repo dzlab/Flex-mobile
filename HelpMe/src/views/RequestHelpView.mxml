@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="RequestHelpView">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:titleContent>
+		<s:Label text="Request help" color="white"/>
+	</s:titleContent>
+	<s:titleLayout>
+		<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:titleLayout>
+	
+	<s:actionContent>
+		<s:Image width="50" height="50" smooth="true" source="@Embed('assets/help.png')"/>
+	</s:actionContent>
+	
+	<s:navigationContent>
+		<s:Button label="Back" />
+	</s:navigationContent>
+	<s:VGroup left="10" right="10" top="10" bottom="10">
+		<s:Label text="Description"/>
+		<s:TextInput width="100%" paddingTop="5"/>
+		
+		<s:Label text="Message" paddingTop="10"/>
+		<s:TextArea width="100%" height="200"/>
+		<s:CheckBox label="Include GPS coordinate" selected="true"/>
+		
+	</s:VGroup>
+	
+</s:View>

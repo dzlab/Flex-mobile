@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="HomeView" xmlns:assets="skins.assets.*"
+		>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	
+<!--	
+	<s:Button horizontalCenter="0" label="Hello Skinning" y="15" 
+			  skinClass="skins.ButtonSkin"/>
+	
+	<assets:Button_up horizontalCenter="0" y="70" />
+	
+	<s:Button horizontalCenter="0" label="Hello skinning" y="140" skinClass="skins.OptimizedButtonSkin" width="120" height="40" />
+-->
+	<s:Button horizontalCenter="0" label="Hello Skinning" y="15" />
+	
+	<assets:Button_up horizontalCenter="0" y="70" />
+	
+	<s:Button horizontalCenter="0" label="Hello skinning" y="140" styleName="Red" width="120" height="40" />
+</s:View>

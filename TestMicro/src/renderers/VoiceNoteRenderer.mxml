@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Author: Christophe Coenraets, http://coenraets.org -->
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark" 
+				xmlns:mx="library://ns.adobe.com/flex/mx" 
+				width="100%" height="70"
+				creationComplete="creationCompleteHandler()">
+
+	<fx:Script>
+		<![CDATA[
+			import events.SoundFileEvent;
+			
+			protected var timer:Timer;
+			
+			protected var contextMenuDispatched:Boolean = false;
+			
+			protected function creationCompleteHandler():void
+			{
+				addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler, true);
+				addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler, true);
+				addEventListener(MouseEvent.MOUSE_OVER, mouseOverHandler, true);
+				addEventListener(MouseEvent.MOUSE_OUT, mouseOutHandler, true);
+			}
+			
+
+			protected function mouseDownHandler(event:MouseEvent):void
+			{
+				contextMenuDispatched = false;
+				timer = new Timer(500,0)
+				timer.addEventListener(TimerEvent.TIMER, timerHandler);
+				timer.start();
+			}
+			
+			protected function mouseUpHandler(event:Event):void
+			{
+				if (!contextMenuDispatched)
+				{
+					dispatchEvent(new SoundFileEvent(SoundFileEvent.SELECT, data as File));
+					if (timer) timer.stop();
+				}
+			}
+
+			protected function mouseOverHandler(event:MouseEvent):void
+			{
+				currentState="mouseOver";
+			}
+
+			protected function mouseOutHandler(event:MouseEvent):void
+			{
+				currentState="default";
+				if (timer) timer.stop();
+			}
+
+			protected function timerHandler(event:TimerEvent):void
+			{
+				if (timer) timer.stop();
+				dispatchEvent(new SoundFileEvent(SoundFileEvent.MENU, data as File));
+				contextMenuDispatched = true;
+			}
+
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="default"/>
+		<s:State name="mouseOver"/>
+	</s:states>
+
+	<fx:Declarations>
+		<mx:DateFormatter id="df" formatString="EEEE MMMM D YYYY, L:NNA"/>
+	</fx:Declarations>
+
+	<s:SkinnableContainer left="0" right="0" top="0" bottom="0" backgroundColor="#DCDCDC" backgroundColor.mouseOver="#FF5900">
+		<s:Label text="{df.format((data as File).creationDate)}" left="4" right="4" verticalCenter="0" maxDisplayedLines="1"/>
+	</s:SkinnableContainer>
+
+	<s:Line bottom="0" left="0" right="0">
+		<s:stroke>
+			<s:SolidColorStroke color="#505050"	weight="1" alpha="1"/>
+		</s:stroke>
+	</s:Line>
+	
+</s:ItemRenderer>

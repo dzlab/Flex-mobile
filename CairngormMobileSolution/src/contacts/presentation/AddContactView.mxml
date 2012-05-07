@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="Add Contact" 
+		xmlns:parsley="http://www.spicefactory.org/parsley">
+	
+	<s:layout>
+		<s:VerticalLayout paddingTop="15" gap="15" horizontalAlign="center"/>
+	</s:layout>
+	
+	<fx:Declarations>
+		<parsley:Configure />
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import contacts.application.AddContactsMessage;
+			import contacts.domain.Contact;
+			
+			import mx.rpc.events.ResultEvent;
+			
+			[MessageDispatcher]
+			public var dispatcher:Function;			
+			
+			protected function cancelAddContact(event:MouseEvent):void
+			{
+				navigator.popView();
+			}
+			
+			protected function saveContact(event:MouseEvent):void
+			{
+				var contact:Contact = new Contact();
+				contact.firstname = firstnameInput.text;
+				contact.lastname = lastnameInput.text;
+				contact.email = emailInput.text;
+				dispatcher(new AddContactsMessage(contact));
+			}
+			
+			[CommandResult]
+			public function afterSave(event:ResultEvent, trigger:AddContactsMessage):void
+			{
+				navigator.popView();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:actionContent>
+		<s:Button label="Terminer" click="saveContact(event)" />
+	</s:actionContent>
+	
+	<s:navigationContent>
+		<s:Button label="Annuler" click="cancelAddContact(event)" />
+	</s:navigationContent>
+	
+	<s:TextInput id="firstnameInput" prompt="Prénom" />
+	<s:TextInput id="lastnameInput" prompt="Nom" />
+	<s:TextInput id="emailInput" prompt="Courriel" />
+	
+</s:View>

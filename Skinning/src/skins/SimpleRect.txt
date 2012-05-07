@@ -1,0 +1,20 @@
+	<s:Rect top="0" bottom="0" left="0" right="0" radiusX="10" radiusY="10">
+		<s:stroke>
+			<s:SolidColorStroke color="0xACACAC" weight="1" pixelHinting="true"/>
+		</s:stroke>
+		<s:fill>
+			<s:SolidColor color="#FFFFFF"/>
+		</s:fill>	
+	</s:Rect>
+	
+	<s:Rect top="0" bottom="0" left="0" right="0" radiusX="10" radiusY="10" includeIn="down">
+		<s:stroke>
+			<s:SolidColorStroke color="0xACACAC" weight="1" pixelHinting="true"/>
+		</s:stroke>
+		<s:fill>
+			<s:LinearGradient rotation="90">
+				<s:GradientEntry alpha="1.0" color="#076EFC" ratio="0.3137254901960784"/>
+				<s:GradientEntry alpha="1.0" color="#0040EA" ratio="1"/>
+			</s:LinearGradient>
+		</s:fill>	
+	</s:Rect>

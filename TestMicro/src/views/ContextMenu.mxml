@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 backgroundColor="#505050" backgroundAlpha=".5"
+		 creationComplete="completeHandler()">
+	
+	<fx:Script>
+		<![CDATA[
+			import events.MyContextMenuEvent;
+			
+			import mx.collections.ArrayCollection;
+			
+			import skins.ContextMenuPanelSkin;
+			
+			[Bindable]
+			public var file:File;
+
+			[Bindable]
+			public var actions:ArrayCollection;
+			
+			protected function completeHandler():void
+			{
+				//panel.titleDisplay.setStyle("color", "#FFFFFF");
+				addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+				
+				addEventListener("delete", deleteHandler);
+
+				actions = new ArrayCollection();
+				actions.addItem("Delete");
+				actions.addItem("Email");
+			}
+			
+			protected function mouseDownHandler(event:MouseEvent):void
+			{
+				trace(""+this);
+				trace(""+event.target);
+				if (event.target == this.skin)
+					dispatchEvent(new MyContextMenuEvent(MyContextMenuEvent.MENU_CLOSE, file));
+			}
+
+			protected function deleteHandler(event:Event):void
+			{
+				dispatchEvent(new MyContextMenuEvent(MyContextMenuEvent.DELETE, file));
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<mx:DateFormatter id="df" formatString="EEEE MMMM D YYYY, L:NNA"/>
+	</fx:Declarations>
+	
+	
+	<s:Panel id="panel" title="{df.format(file.creationDate)}" left="20" right="20" verticalCenter="-20" skinClass="skins.ContextMenuPanelSkin">
+		<!--
+		<s:layout>
+			<s:VerticalLayout paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" gap="10"/>
+		</s:layout>
+		
+		<s:Button label="Delete" width="100%" height="100" click="dispatchEvent(new MyContextMenuEvent(MyContextMenuEvent.DELETE, file))"/>
+		<s:Button label="Email" width="100%" height="100" click="dispatchEvent(new MyContextMenuEvent(MyContextMenuEvent.EMAIL, file))"/>
+		-->
+		
+		<s:DataGroup dataProvider="{actions}" top="0" left="0" right="0" bottom="0" itemRenderer="renderers.ActionRenderer">
+			<s:layout>
+				<s:VerticalLayout gap="0"/>
+			</s:layout>
+		</s:DataGroup>
+	</s:Panel>
+
+	
+</s:SkinnableContainer>

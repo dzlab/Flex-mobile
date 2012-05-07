@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark">
+	
+	<!-- host component -->
+	<fx:Metadata>
+		[HostComponent("spark.components.Button")]
+	</fx:Metadata>
+	
+	<!-- states -->
+	<s:states>
+		<s:State name="disabled" />
+		<s:State name="down" />
+		<s:State name="over" />
+		<s:State name="up" />
+	</s:states>
+	
+	<!-- SkinParts
+	name=iconDisplay, type=spark.primitives.BitmapImage, required=false
+	name=labelDisplay, type=spark.core.IDisplayText, required=false
+	-->
+	
+	<s:Rect top="0" bottom="0" left="0" right="0" radiusX="10" radiusY="10">
+		<s:stroke>
+			<s:SolidColorStroke color="0xACACAC" weight="1" pixelHinting="true"/>
+		</s:stroke>
+		<s:fill>
+			<s:SolidColor color="#FFFFFF"/>
+		</s:fill>	
+	</s:Rect>
+	
+	<s:Rect top="0" bottom="0" left="0" right="0" radiusX="10" radiusY="10" includeIn="down">
+		<s:stroke>
+			<s:SolidColorStroke color="0xACACAC" weight="1" pixelHinting="true"/>
+		</s:stroke>
+		<s:fill>
+			<s:LinearGradient rotation="90">
+				<s:GradientEntry alpha="1.0" color="#076EFC" ratio="0.3137254901960784"/>
+				<s:GradientEntry alpha="1.0" color="#0040EA" ratio="1"/>
+			</s:LinearGradient>
+		</s:fill>	
+	</s:Rect>
+	
+	<s:Label id="labelDisplay" left="2" right="2" verticalCenter="0" textAlign="center" color.down="#FFFFFF"/>	
+	
+</s:Skin>

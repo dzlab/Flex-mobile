@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:IconItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark"  
+					labelFunction="fullName" messageField="email" 
+					iconField="photo" iconWidth="60" iconHeight="60">  
+<!--					decorator="@Embed('assets/arrow.png')"
+					creationComplete="incrementCount(event)">
+-->
+
+
+	<fx:Script>
+		<![CDATA[
+			
+			public function fullName(item:Object):String
+			{
+				return item.firstname + " " + item.lastname;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+</s:IconItemRenderer>

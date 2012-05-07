@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="Home For State" xmlns:components="components.*">
+	
+	<!-- Default layout -->
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" paddingTop="15" />
+	</s:layout>
+	<!-- Layout in case the phone is in landscape -->
+	<s:layout.landscape>
+		<s:HorizontalLayout/>
+	</s:layout.landscape>
+	
+	<s:states>
+		<s:State name="portrait"/>
+		<s:State name="landscape"/>
+	</s:states>
+
+	
+	<components:Login id="login" />
+	<s:VGroup horizontalAlign="center">
+		<s:Button label="Error" click="login.currentState='error'" />
+		<s:Button label="Connecting" click="login.currentState='connecting'" />
+		<s:Button label="Normal" click="login.currentState='normal'" />
+	</s:VGroup>
+	
+	<s:Spacer height="30" includeIn="portrait" />
+	
+</s:View>

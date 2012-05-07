@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="HomeView">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:Button label="Simple" skinClass="skins.SimpleButtonSkin" horizontalCenter="0" top="15"
+			  width="280" height="44" click="navigator.pushView(secondView)"/>
+	
+	<s:Button label="Optimized" skinClass="skins.OptimizedButtonSkin" horizontalCenter="0" y="74" 
+			  width="280" height="44" color="white" fontSize="20"/>
+</s:View>

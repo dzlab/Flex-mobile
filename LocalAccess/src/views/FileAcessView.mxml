@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="Note (fichier)"
+		viewActivate="loadNote(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import spark.events.ViewNavigatorEvent;
+			protected function saveNote(event:MouseEvent):void
+			{
+				var file:File = File.applicationStorageDirectory.resolvePath("note.txt");
+				if(file.exists)
+					file.deleteFile();
+				var fileStream:FileStream = new FileStream();
+				fileStream.open(file, FileMode.WRITE);
+				fileStream.writeUTFBytes(noteArea.text);
+				fileStream.close();
+			}
+			
+			protected function loadNote(event:ViewNavigatorEvent):void
+			{
+				var file:File = File.applicationStorageDirectory.resolvePath("note.txt");
+				if(!file.exists) {
+					trace("There is no note saved");
+					return;
+				}
+				
+				var fileStream:FileStream = new FileStream();
+				fileStream.open(file, FileMode.READ);
+				var note:String = fileStream.readUTFBytes(fileStream.bytesAvailable);
+				fileStream.close();
+				noteArea.text = note;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	<s:actionContent>
+		<s:Button label="Save" click="saveNote(event)" />
+	</s:actionContent>
+	
+	<fx:Script>
+		<![CDATA[
+			
+		]]>
+	</fx:Script>
+	<s:TextArea id="noteArea" 
+				top="0" left="0" right="0" bottom="0" />
+</s:View>

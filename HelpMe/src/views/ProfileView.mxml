@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="ProfileView">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:titleContent>
+		<s:Label text="Pofile" color="white"/>
+	</s:titleContent>
+	<s:titleLayout>
+		<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:titleLayout>
+	
+	<s:actionContent>
+		<s:Image width="50" height="50" smooth="true" source="@Embed('assets/profile.png')"/>
+	</s:actionContent>
+	
+	<s:navigationContent>
+		<s:Button label="Back" />
+	</s:navigationContent>
+	<s:VGroup left="10" right="10" top="10" bottom="10">
+		<s:Image smooth="true" source="@Embed('assets/Age-Child-Female-Light-icon.png')"/>
+		
+		<s:Spacer top="10" />
+		
+		<s:Label fontWeight="bold" text="Username"/>
+		<s:TextInput width="100%" prompt="username"/>
+		<s:HGroup>
+			<s:Label height="100%" fontWeight="bold" text="Sexe" verticalAlign="middle"/>
+			<s:RadioButton label="Male"/>
+			<s:RadioButton label="Female"/>
+		</s:HGroup>
+		<s:Label fontWeight="bold" text="Location"/>
+		<s:TextInput width="100%" prompt="location"/>
+		<s:Label fontWeight="bold" text="General information"/>
+		<s:TextArea prompt="describe your self"/>
+
+	</s:VGroup>
+	
+</s:View>

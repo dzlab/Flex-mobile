@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="HelpMe">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:VGroup y="0" left="10" right="10">		
+		<s:HGroup width="100%" paddingTop="10">
+			<s:Image width="70" height="70" smooth="true" source="@Embed('assets/login.png')"/>
+			<s:Label width="200" text="This is the first time you use this application."
+					 verticalCenter="true"/>
+		</s:HGroup>
+		<s:TextInput width="100%" prompt="username" />
+		<s:TextInput width="100%" prompt="password" />
+		<s:Button width="100%" label="Login"/>
+		
+		<s:HGroup width="100%" paddingTop="10">
+			<s:Image width="25" height="25" smooth="true" source="@Embed('assets/gmail.jpg')"/>
+			<s:Image width="25" height="25" smooth="true" source="@Embed('assets/twitter.jpg')"/>
+			<s:Image width="25" height="25" smooth="true" source="@Embed('assets/facebook-icon.png')"/>
+			<s:Image width="25" height="25" smooth="true" source="@Embed('assets/ovi.jpg')"/>
+			<s:Image width="25" height="25" smooth="true" source="@Embed('assets/msn.png')"/>
+		</s:HGroup>
+		
+	</s:VGroup>
+	
+	
+	
+</s:View>

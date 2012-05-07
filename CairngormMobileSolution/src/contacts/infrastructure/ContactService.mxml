@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sql:SQLiteService xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:sql="com.baao.sql.*"
+				   implements="contacts.infrastructure.IContactService">
+	<fx:Script>
+		<![CDATA[
+			import contacts.domain.Contact;
+			
+			import mx.rpc.AsyncToken;
+			
+			public function getAllContacts():AsyncToken
+			{
+				return executeAsync("select * from Contact");
+			}
+			
+			public function addContact(contact:Contact):AsyncToken
+			{
+				//...
+				var parameters:Object = new Object();
+				parameters[":firstname"] = contact.firstname;
+				parameters[":lastname"] = contact.lastname;
+				parameters[":email"] = contact.email;
+				return executeAsync("insert into Contact (firstname, lastname, email) VALUES (:firstname, :lastname, :email)",
+					null, parameters);
+			}		
+		]]>
+	</fx:Script>
+</sql:SQLiteService>

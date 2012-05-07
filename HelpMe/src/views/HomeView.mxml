@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="HelpMe">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:TileGroup left="40" right="40" top="60" bottom="60" horizontalAlign="justify"
+				 verticalAlign="justify">
+		
+		<s:VGroup>
+			<s:Image width="70" height="70" smooth="true" source="@Embed('assets/Path.png')"/>
+			<s:Label fontWeight="bold" text="Safe path" verticalCenter="true"/>
+		</s:VGroup>
+		<s:VGroup horizontalAlign="right">
+			<s:Image width="70" height="70" smooth="true" source="@Embed('assets/Map.png')"/>
+			<s:Label fontWeight="bold" text="Security in Map" verticalCenter="true"/>
+		</s:VGroup>		
+
+		<s:VGroup>
+			<s:Image width="70" height="70" smooth="true" source="@Embed('assets/help.png')"/>
+			<s:Label fontWeight="bold" text="Request help" verticalCenter="true"/>
+		</s:VGroup>		
+		
+		<s:VGroup horizontalAlign="right">
+			<s:Image width="70" height="70" smooth="true" source="@Embed('assets/tools.png')"/>
+			<s:Label fontWeight="bold" text="Customization" verticalCenter="true"/>
+		</s:VGroup>		
+		
+		<s:VGroup>
+			<s:Image width="70" height="70" smooth="true" source="@Embed('assets/people.png')"/>
+			<s:Label fontWeight="bold" text="People" verticalCenter="true"/>
+		</s:VGroup>		
+		<s:VGroup horizontalAlign="right">
+			<s:Image width="70" height="70" smooth="true" source="@Embed('assets/profile.png')"/>
+			<s:Label fontWeight="bold" text="My profile" verticalCenter="true"/>
+		</s:VGroup>		
+		
+		
+	</s:TileGroup>
+	
+</s:View>

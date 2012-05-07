@@ -1,0 +1,12 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+
+s|Button 
+{
+	skinClass: ClassReference("skins.ButtonSkin");			
+}
+
+s|Button.Red 
+{
+	skinClass: ClassReference("skins.OptimizedButtonSkin");			
+}

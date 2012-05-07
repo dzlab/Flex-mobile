@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:views="views.*"
+			   currentState="list"
+			   backgroundColor="#DCDCDC"
+			   width="500" height="550"
+			   applicationComplete="completeHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.audio.format.WAVWriter;
+			
+			import events.MyContextMenuEvent;
+			import events.SoundClipEvent;
+			import events.SoundFileEvent;
+			
+			protected var directory:File;
+			
+			protected function completeHandler(event:Event):void
+			{
+				// Setting Global Exception Handler
+				loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, uncaughtErrorHandler);
+				
+				addEventListener(SoundFileEvent.MENU, contextMenuHandler);
+				addEventListener(SoundFileEvent.SELECT, fileSelectedHandler);
+				addEventListener(MyContextMenuEvent.DELETE, deleteHandler);
+				addEventListener(MyContextMenuEvent.EMAIL, emailHandler);
+				addEventListener(MyContextMenuEvent.MENU_CLOSE, menuCloseHandler);
+				
+				readDirectory();
+				
+			}	
+			
+			protected function readDirectory():void
+			{
+				directory = File.documentsDirectory.resolvePath("voicenotesdata");
+				if (!directory.exists) directory.createDirectory();
+				list.files = directory.getDirectoryListing();
+			}
+			
+			private function uncaughtErrorHandler(event:UncaughtErrorEvent):void
+			{
+				currentState = "error";
+				errorView.message.text = ""+event.error;
+			}			
+			
+			protected function contextMenuHandler(event:SoundFileEvent):void
+			{
+				currentState = "contextMenu";
+				myContextMenu.file = event.file;
+			}
+			
+			protected function fileSelectedHandler(event:SoundFileEvent):void
+			{
+				readFile(event.file);
+			}
+			
+			protected function readFile(file:File):void
+			{
+				currentState="playing";
+				var bytes:ByteArray = new ByteArray();
+				var stream:FileStream = new FileStream();
+				stream.open(file, FileMode.READ);
+				stream.readBytes(bytes);
+				stream.close();
+				playingView.startPlaying(bytes);
+			}
+			
+			protected function deleteHandler(event:MyContextMenuEvent):void
+			{
+				event.file.deleteFile();
+				readDirectory();
+				currentState = "list";
+			}
+			
+			protected function emailHandler(event:MyContextMenuEvent):void
+			{
+				currentState = "list";
+				navigateToURL(new URLRequest("mailto:"));
+			}
+			
+			protected function menuCloseHandler(event:MyContextMenuEvent):void
+			{
+				currentState = "list";
+			}
+			
+			protected function startRecording():void
+			{
+				currentState = "recording";
+				recordingView.startRecording();
+			}
+			
+			protected function recordingEndHandler(event:SoundClipEvent):void
+			{
+				writeFile(event.soundClip);
+				readDirectory();				
+				currentState = "list";
+			}
+			
+			
+			
+			
+			protected function writeFile(bytes:ByteArray):void
+			{
+				var file:File = directory.resolvePath(df.format(new Date())+".vn");				
+				var stream:FileStream = new FileStream();
+				stream.open(file, FileMode.WRITE);
+				stream.writeBytes(bytes);
+				stream.close();
+			}
+			
+			protected function writeWAV(bytes:ByteArray):void
+			{
+				var outputDir:File = File.documentsDirectory.resolvePath("voicenotesdata");
+				if (!outputDir.exists) outputDir.createDirectory();
+				var outputFile:File = outputDir.resolvePath(df.format(new Date())+".wav");				
+				
+				var outputStream:FileStream = new FileStream();
+				var wavWriter:WAVWriter = new WAVWriter();
+				
+				bytes.position = 0;  // rewind to the beginning of the sample
+				
+				wavWriter.numOfChannels = 1; // set the inital properties of the Wave Writer
+				wavWriter.sampleBitRate = 16;
+				wavWriter.samplingRate = 44100;
+				
+				outputStream.open(outputFile, FileMode.WRITE);  //write out our file to disk.
+				wavWriter.processSamples(outputStream, bytes, 44100, 1); // convert our ByteArray to a WAV file.
+				outputStream.close();
+			}
+			
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Style source="styles.css"/>
+	
+	<fx:Declarations>
+		<mx:DateFormatter id="df" formatString="YYYY-MM-DD LLNNSSA"/>
+	</fx:Declarations>
+	
+	<s:states>
+		<s:State name="list"/>
+		<s:State name="contextMenu"/>
+		<s:State name="recording"/>
+		<s:State name="playing"/>
+		<s:State name="error"/>
+	</s:states>
+	
+	<views:VoiceNoteList id="list" left="8" right="8" bottom="78" top="8" visible="false" visible.list="true" visible.contextMenu="true"/>
+	
+	<views:ContextMenu id="myContextMenu" left="0" top="0" right="0" bottom="0" visible="false" visible.contextMenu="true"/>
+	
+	<views:RecordingView id="recordingView" left="8" right="8" bottom="8" top="8" visible="false" visible.recording="true"
+						 recordingEnd="recordingEndHandler(event)"/>
+	
+	<views:PlayingView id="playingView" left="8" right="8" bottom="8" top="8" visible="false" visible.playing="true"
+					   playingEnd="currentState='list'"/>
+	
+	<s:Button label="Record New Message" click="startRecording()" height="70" left="8" bottom="8" right="8" visible="false" visible.list="true"/>		
+	
+	<views:ErrorView id="errorView" close="currentState='list'" left="0" right="0" top="0" bottom="0" visible="false" visible.error="true"/>
+	
+</s:Application>

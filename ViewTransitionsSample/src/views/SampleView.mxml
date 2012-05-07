@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		title="Hello World" viewActivate="view1_viewActivateHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import spark.effects.Move3D;
+			import spark.effects.easing.EaseInOutBase;
+			import spark.events.ViewNavigatorEvent;
+			
+			protected function view1_viewActivateHandler(event:ViewNavigatorEvent):void
+			{
+				lbl.visible=true;
+				trace("Screen resolution:" + Capabilities.screenResolutionX);
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<s:DropShadowFilter id="df"/>
+	</fx:Declarations>
+
+	<s:navigationContent>
+		<s:Button label="Home" height="100" click="navigator.popToFirstView()"/>
+	</s:navigationContent>
+	<s:actionContent>
+		<s:Button id="btn" height="100" label="Back" click="navigator.pushView(data as Class)"/>
+	</s:actionContent>
+	<s:Label id="lbl" top="270" horizontalCenter="0" color="#FD5ABE" fontSize="50" fontWeight="bold" text="Hello World!" depth="1"/>
+	
+	<s:Group width="200" horizontalCenter="0" height="200" top="100" filters="{[df]}" >
+		<s:Rect width="400" height="400" horizontalCenter="0" depth="0">
+			<s:filters>
+				<s:DropShadowFilter color="0x000000" blurX="10" blurY="10"/>
+			</s:filters>
+			<s:fill>
+				<s:SolidColor color="0xac66d8" alpha=".4"/>
+			</s:fill>
+		</s:Rect>
+	</s:Group>
+</s:View>

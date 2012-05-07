@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="SQLiteView"
+		viewActivate="loadNoteFromSQLite(event)"
+		viewDeactivate="closeDB(event)">
+
+	<s:actionContent>
+		<s:Button label="Add" click="writeNoteToSQLite(event)" />
+	</s:actionContent>
+	
+	<fx:Script>
+		<![CDATA[
+			import domain.Note;
+			
+			import spark.events.ViewNavigatorEvent;
+			
+			private var sqlConnectionSync:SQLConnection;
+
+			// "SELECT noteId, modificationDate, text FROM Note ORDER BY noteId"
+			// "INSERT INTO Note (modificationDate, text) VALUES (:modificationDate, :text)"
+			
+			protected function loadNoteFromSQLite(event:ViewNavigatorEvent):void
+			{
+				var file:File = File.applicationDirectory.resolvePath("db/note.db");
+				// tell me where the file is stored
+				trace(file.nativePath);
+				sqlConnectionSync = new SQLConnection();
+				sqlConnectionSync.open(file, SQLMode.UPDATE);
+				
+				var read:SQLStatement = new SQLStatement(); //create the read statemen
+				read.sqlConnection = sqlConnectionSync; //set the connection
+				
+				// map rows to a class
+				read.itemClass = Note;
+				read.text = "SELECT noteId, modificationDate, text FROM Note ORDER BY noteId";
+				read.execute();
+				var result:SQLResult = read.getResult(); //retrieve the result of the query
+				trace(result.data);
+				if(result.data && (result.data.length > 0))
+				{
+					// casting with 'as' or ClassName(obj)
+					var note:Note = result.data[result.data.length - 1] as Note;
+					//var note:Note = Note(result.data[result.data.length - 1]);
+					noteArea.text = note.text;
+				}
+				
+			}			
+
+			private function writeNoteToSQLite(event:MouseEvent):void 
+			{
+				var insert:SQLStatement = new SQLStatement(); //create the insert statement
+				insert.sqlConnection = sqlConnectionSync; //set the connection
+				insert.text = "INSERT INTO Note (modificationDate, text) VALUES (?, ?)";
+				insert.parameters[0] = new Date();
+				insert.parameters[1] = noteArea.text;
+				insert.execute();
+				trace("The data was saved into the table!");
+			}			
+			
+			protected function closeDB(event:ViewNavigatorEvent):void
+			{
+				sqlConnectionSync.close();
+			}
+			
+		]]>
+		
+	</fx:Script>
+	<s:TextArea id="noteArea" 
+				top="0" left="0" right="0" bottom="0" />
+</s:View>

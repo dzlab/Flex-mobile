@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="ProfileView">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:titleContent>
+		<s:Label text="Bob75's Pofile" color="white"/>
+	</s:titleContent>
+	<s:titleLayout>
+		<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:titleLayout>
+	
+	<s:actionContent>
+		<s:Image width="50" height="50" smooth="true" source="@Embed('assets/profile.png')"/>
+	</s:actionContent>
+	
+	<s:navigationContent>
+		<s:Button label="Back" />
+	</s:navigationContent>
+	<s:VGroup left="10" right="10" top="10" bottom="10">
+		<s:HGroup width="100%" verticalAlign="middle">
+			<s:Image smooth="true" source="@Embed('assets/administrator-icon.png')"/>
+			<s:Image width="229" height="20" smooth="true" source="@Embed('assets/quality1.PNG')"
+					 verticalAlign="middle"/>					
+		</s:HGroup>
+		
+		<s:Spacer top="10" />
+		<s:Label fontSize="20" fontWeight="bold" text="Bob75" textAlign="center" color="blue"/>
+		<s:HGroup>
+			<s:Label fontWeight="bold" text="Sexe: " verticalAlign="middle"/>
+			<s:Label fontWeight="normal" text="Male" verticalAlign="middle"/>			
+		</s:HGroup>
+		<s:HGroup>
+			<s:Label fontWeight="bold" text="Location: " verticalAlign="middle"/>
+			<s:Label fontWeight="normal" text="New York" verticalAlign="middle"/>			
+		</s:HGroup>
+		<s:Label fontWeight="bold" text="General information:"/>
+		<s:Label fontWeight="normal" text="      . . ."/>
+		
+		<s:Spacer top="40" />
+		
+		<s:Label fontWeight="bold" text="What do think about him?"/>
+		
+		<s:RadioButton label="Hero"/>
+		<s:RadioButton label="Spammer"/>
+		<s:RadioButton label="Untrustable"/>
+		<s:Button label="Report" width="100%"/>
+
+	</s:VGroup>
+	
+</s:View>

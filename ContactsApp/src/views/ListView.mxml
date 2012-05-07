@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="HomeView">
+	
+	<s:states>
+		<s:State name="state1"/>
+	</s:states>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" paddingBottom="5" paddingLeft="1"
+						  paddingRight="1" paddingTop="5"/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import domain.Contact;
+			import domain.Model;
+			
+			import mx.collections.ArrayCollection;
+			import mx.core.FlexGlobals;
+			
+			import spark.events.ViewNavigatorEvent;
+			
+			protected function addContact(event:MouseEvent):void
+			{					
+				navigator.pushView(AddView);
+			}
+							
+		]]>
+	</fx:Script>
+	
+	<s:navigationContent />
+	
+	<s:titleContent>
+		<s:Label text="Contacts" color="white"/>
+	</s:titleContent>
+	<s:titleLayout>
+		<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:titleLayout>
+	
+	<s:actionContent>
+		<s:Button label="+" click="addContact(event)"/>
+	</s:actionContent>
+	
+		
+	<s:TextInput prompt="Recherche" width="100%" />
+		
+		
+	<s:List id="list" width="100%" height="100%" dataProvider="{Model.getModel().contacts}"
+			itemRenderer="renderers.ContactRenderer"/>
+<!--	
+		<s:itemRenderer>
+			<fx:Component>
+				<s:IconItemRenderer label="{data.firstname} {data.lastname}" />
+			</fx:Component>
+		</s:itemRenderer>
+	</s:List>
+-->	
+	
+	
+</s:View>

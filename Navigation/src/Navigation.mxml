@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:ViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+							xmlns:s="library://ns.adobe.com/flex/spark" 
+							firstView="views.NavigationHomeView"
+							creationComplete="initTransition(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			protected function back(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.popView();
+			}
+			
+			protected function initTransition(event:FlexEvent):void
+			{
+				// Set how views transit at the moment of CreationComplete event
+				navigator.defaultPushTransition = up;
+				navigator.defaultPopTransition  = down;
+			}
+			
+		]]>
+	</fx:Script>
+	
+
+	<s:navigationContent>
+		<s:Button label="Back" click="back(event)" />
+	</s:navigationContent>
+	
+	<fx:Declarations>
+		<s:SlideViewTransition id="up" direction="up" transitionControlsWithContent="true" mode="cover" />
+		<s:SlideViewTransition id="down" direction="down" transitionControlsWithContent="true" />
+	</fx:Declarations>
+	
+</s:ViewNavigatorApplication>

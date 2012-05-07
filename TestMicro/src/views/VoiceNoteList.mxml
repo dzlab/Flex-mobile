@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 styleName="list"
+		 creationComplete="completeHandler(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import events.SoundFileEvent;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.FlexEvent;
+
+			public function set files(files:Array):void
+			{
+				dg.dataProvider = new ArrayCollection(files);
+				dg.verticalScrollPosition = 0;
+			}
+			
+			private var prevY:Number;
+			
+			private var velocity:Number = 0;
+			
+			private var lastMove:Number = 0;
+			
+			private static const MOVE_INTERVAL:Number = 100;			
+			
+			public function set verticalScrollPolicy(policy:String):void
+			{
+				scroller.setStyle("verticalScrollPolicy", policy);
+			}
+			
+			protected function completeHandler(event:Event):void
+			{
+				if (Multitouch.supportsTouchEvents)
+				{
+					Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
+					addEventListener(TouchEvent.TOUCH_BEGIN, onTouchBegin, true);
+					addEventListener(TouchEvent.TOUCH_MOVE, onTouchMove, true);
+					addEventListener(TouchEvent.TOUCH_END, onTouchEnd, true);
+				}
+				this.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler, true);
+			}			
+						
+			protected function onTouchBegin(event:TouchEvent):void
+			{
+				velocity = 0;
+				
+				if (a.isPlaying)
+				{
+					a.stop();
+				}
+				
+				prevY = event.stageY;
+			}
+			
+			protected function onTouchMove(event:TouchEvent):void
+			{
+				var deltaY:Number = Math.round((prevY - event.stageY));
+				
+				// average the current velocity with the new velocity
+				velocity = (deltaY + velocity) / 2;
+				
+				var desiredY:Number = dg.verticalScrollPosition + deltaY;
+				
+				scrollTo(desiredY);
+				
+				prevY = event.stageY;
+				
+				lastMove = new Date().time;
+				
+				event.preventDefault();
+				event.stopImmediatePropagation();
+				event.stopPropagation();
+			}
+			
+			protected function onTouchEnd(event:TouchEvent):void
+			{
+				var scrollDistance:Number = (velocity * 6);
+				
+				// calc distance
+				smp.valueFrom = dg.verticalScrollPosition;
+				if (dg.verticalScrollPosition + scrollDistance < 0)
+				{
+					smp.valueTo = 0;
+				}
+				else if (dg.verticalScrollPosition + scrollDistance > dg.contentHeight)
+				{
+					smp.valueTo = dg.contentHeight;
+				}
+				else
+				{
+					smp.valueTo = dg.verticalScrollPosition + scrollDistance;
+				}
+				
+				a.play();
+			}
+			
+			protected function onKeyDown(event:KeyboardEvent):void
+			{
+				if (event.keyCode == Keyboard.UP)
+				{
+					scrollTo(dg.contentHeight + 160);
+				}
+				else if (event.keyCode == Keyboard.DOWN)
+				{
+					scrollTo(dg.contentHeight - 160);
+				}
+			}
+			
+			protected function scrollTo(y:Number):void
+			{
+				if (y < 0)
+				{
+					y = 0;
+					
+					velocity = 0;
+				}
+				else if (y > dg.contentHeight)
+				{
+					y = dg.contentHeight;
+					
+					velocity = 0;
+				}
+				
+				dg.verticalScrollPosition = y;
+			}			
+			
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<s:Animate id="a" target="{dg}" duration="1000">
+			<s:motionPaths>
+				<s:SimpleMotionPath id="smp" property="verticalScrollPosition"/>
+			</s:motionPaths>
+			<s:easer>
+				<s:Power exponent="4" easeInFraction="0"/>
+			</s:easer>
+		</s:Animate>
+	</fx:Declarations>
+
+	<s:Scroller id="scroller" minViewportInset="10" top="0" left="0" right="0" bottom="0" 
+				skinClass="skins.MyScrollerSkin"
+				horizontalScrollPolicy="off">
+		<s:DataGroup id="dg" itemRenderer="renderers.VoiceNoteRenderer">
+			<s:layout>
+				<s:VerticalLayout paddingLeft="0" paddingRight="0" paddingTop="0" paddingBottom="0" gap="0" useVirtualLayout="true"/>
+			</s:layout>
+		</s:DataGroup>
+	</s:Scroller>
+
+</s:SkinnableContainer>

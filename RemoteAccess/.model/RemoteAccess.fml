@@ -1,0 +1,66 @@
+
+<model xmlns="http://ns.adobe.com/Fiber/1.0">
+  <annotation name="ActionScriptGeneration">
+    <item name="FullyQualifyReferences">true</item>
+  </annotation>
+  <service name="FilmService">
+    <annotation name="ActionScriptGeneration">
+      <item name="ServiceType">HTTPMultiService</item>
+      <item name="Package">services</item>
+    </annotation>
+    <annotation name="ServiceTypeGroup">
+      <item name="ServiceBackendType">HTTPService</item>
+    </annotation>
+    <annotation name="ServiceConfig">
+      <item name="DEFAULT_ENTITY_PACKAGE">vo</item>
+      <item name="LINKED_FILE"></item>
+    </annotation>
+    <function name="getFilms" return-type="Film[]">
+      <annotation name="analyze group">
+        <item name="analyzed">true</item>
+      </annotation>
+      <annotation name="ActionScriptGeneration">
+        <item name="SerializationFilter">com.adobe.serializers.xml.XMLSerializationFilter</item>
+        <item name="method">GET</item>
+        <item name="url">http://baao.com/data/films.xml</item>
+      </annotation>
+      <annotation name="url group">
+        <item name="completeURL">http://baao.com/data/films.xml</item>
+      </annotation>
+      <annotation name="ValidProperties">
+        <item name="propertySpecifier">name,shortDescription,description,source,date,duration,by,type</item>
+      </annotation>
+      <annotation name="Properties">
+        <item name="xPath">/::film</item>
+      </annotation>
+      <annotation name="original signature">
+        <item name="returnType">opaque</item>
+      </annotation>
+    </function>
+  </service>
+  <entity name="Film">
+    <annotation name="EntityProperties">
+      <item name="EntityOriginalName">Film</item>
+    </annotation>
+    <annotation name="service Group">
+      <item name="service">FilmService</item>
+    </annotation>
+    <annotation name="ServerProperties">
+      <item name="IncludeRemoteClass">nonempty</item>
+    </annotation>
+    <annotation name="getFilms">
+      <item name="propertySpecifier">name,shortDescription,description,source,date,duration,by,type</item>
+    </annotation>
+    <annotation name="ActionScriptGeneration">
+      <item name="Package">vo</item>
+    </annotation>
+    <property name="name" type="string" required="true"/>
+    <property name="shortDescription" type="string" required="true"/>
+    <property name="description" type="string" required="true"/>
+    <property name="source" type="string" required="true"/>
+    <property name="date" type="string" required="true"/>
+    <property name="duration" type="string" required="true"/>
+    <property name="by" type="string" required="true"/>
+    <property name="type" type="string" required="true"/>
+  </entity>
+</model>

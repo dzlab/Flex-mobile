@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="Accelerometer"
+		viewActivate="initApp(event)"
+		viewDeactivate="finalizeApp(event)">
+	<fx:Script>
+		<![CDATA[
+			import flash.sensors.Accelerometer;
+			
+			import mx.events.FlexEvent;
+			
+			import spark.events.ViewNavigatorEvent;
+			
+			private const MULTIPLIER:Number = 40.0;
+			private var accelerometer:Accelerometer;
+			
+			protected function initApp(event:Event):void
+			{				
+				accelerometer = new Accelerometer();
+				accelerometer.addEventListener(AccelerometerEvent.UPDATE, onUpdate);
+			}
+			
+			private function onUpdate(event:AccelerometerEvent):void 
+			{
+				ball.x -= event.accelerationX * MULTIPLIER;
+				ball.y += event.accelerationY * MULTIPLIER;
+			}					
+			
+			protected function finalizeApp(event:ViewNavigatorEvent):void
+			{
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Image id="ball" source="@Embed('assets/bille.png')" width="50" height="50" smooth="true"/>
+</s:View>

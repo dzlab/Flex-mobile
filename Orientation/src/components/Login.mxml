@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark"
+		  horizontalAlign="center">
+	
+	<fx:Script>
+		<![CDATA[
+			[Bindable]
+			public var iconSource:String = "assets/login.jpeg"; 
+
+			[Bindable]
+			public var title:String = "Saisissez vos identifiant pour vous connecter au site de BaaO"; 
+		]]>
+	</fx:Script>
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="connecting"/>
+		<s:State name="error"/>
+	</s:states>
+	<s:HGroup paddingTop="10" paddingLeft="10" paddingRight="10">
+		<s:Image width="75" height="75" smooth="true" smoothingQuality="default"
+				 source="{iconSource}"/>
+		<s:Label width="217" height="75" text="{title}"/>
+	</s:HGroup>
+	
+	<!-- With the added states, attributes of the component  -->
+	<s:TextInput prompt="Utilisateur"
+				 enabled.connecting="false"/>
+	<s:TextInput prompt="Mot de Passe"
+				 enabled.connecting="false"/>
+	<s:Button width="300" label="Connexion"
+			  enabled.connecting="false" />	
+	<s:BusyIndicator includeIn="connecting"/>
+	
+	<s:Label text="En erreur" includeIn="error" color="#FF0000" />
+	
+</s:VGroup>

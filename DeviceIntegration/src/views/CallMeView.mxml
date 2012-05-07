@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="HomeView">
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center" paddingTop="15" gap="15" />
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.net.navigateToURL;
+			
+			protected function callMe(event:MouseEvent):void
+			{
+				//navigateToURL(new URLRequest("tel:"+telInput.text));
+				//navigateToURL(new URLRequest("tel:12345678"));
+				//navigateToURL(new URLRequest("sms:12345678"));
+				//navigateToURL(new URLRequest("mailto:yann@baao.com?subject=Hello&body=World"));
+				navigateToURL(new URLRequest("http://www.baao.com/"));
+			}
+		]]>
+	</fx:Script>
+	
+	<s:TextInput id="telInput" prompt="Phone Number" restrict="0-9"/>
+	<s:Button label="Call Me" click="callMe(event)"/>
+	
+</s:View>

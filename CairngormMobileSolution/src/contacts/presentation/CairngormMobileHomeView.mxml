@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="Contacts" 
+		xmlns:cgm="http://www.spicefactory.org/parsley">
+
+	<s:actionContent>
+		<s:Button label="+" click="navigateToAddContact(event)"/>
+	</s:actionContent>
+	
+	<fx:Declarations>
+		<cgm:Configure />
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import contacts.domain.ContactManager;
+			
+			[Inject]
+			[Bindable]
+			public var manager:ContactManager;
+			
+			protected function navigateToAddContact(event:MouseEvent):void
+			{
+				navigator.pushView(AddContactView);
+			}
+			
+		]]>
+	</fx:Script>
+
+	<s:List width="100%" height="100%" 
+			dataProvider="{manager.allContacts}" labelField="firstname"/>
+	
+</s:View>

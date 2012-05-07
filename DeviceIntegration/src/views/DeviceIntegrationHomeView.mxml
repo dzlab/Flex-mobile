@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		title="Device Integration">
+	
+	<s:navigationContent />
+	
+	<fx:Script>
+		<![CDATA[
+			import spark.events.IndexChangeEvent;
+			
+			protected function navigateTo(event:IndexChangeEvent):void
+			{
+				if (listNav.selectedItem.name == "call")
+					navigator.pushView(CallMeView);
+				else if (listNav.selectedItem.name == "stage")
+					navigator.pushView(BrowserView);
+				else if (listNav.selectedItem.name == "cam")
+					navigator.pushView(CameraView);
+				else if (listNav.selectedItem.name == "geo")
+					navigator.pushView(GeoLocationView);
+				else if (listNav.selectedItem.name == "acc")
+					navigator.pushView(AccelerometerView);
+				else if (listNav.selectedItem.name == "touch")
+					navigator.pushView(TouchView);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	<s:List id="listNav" top="0" left="0" right="0" bottom="0" change="navigateTo(event)">
+		<s:dataProvider>
+			<s:ArrayCollection>
+				<s:source>
+					<fx:Object label="Call me !" name="call" />
+					<fx:Object label="Stage Web View" name="stage" />
+					<fx:Object label="Camera et Camera Roll" name="cam" />
+					<fx:Object label="GéoLocalisation" name="geo" />
+					<fx:Object label="Accelerometer" name="acc" />
+					<fx:Object label="Touch" name="touch" />
+				</s:source>
+			</s:ArrayCollection>
+		</s:dataProvider>
+		<s:itemRenderer>
+			<fx:Component>
+				<s:IconItemRenderer labelField="label" decorator="@Embed('assets/arrow.png')" />
+			</fx:Component>
+		</s:itemRenderer>
+	</s:List>
+	
+</s:View>

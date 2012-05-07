@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="Nouveau Contact" xmlns:parsley="http://www.spicefactory.org/parsley">
+	
+	
+	<fx:Declarations>
+		<parsley:Configure />	
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center"/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import contacts.application.AddContactsMessage;
+			import contacts.domain.Contact;
+			import contacts.domain.ContactManager;
+			
+			import mx.rpc.events.ResultEvent;
+						
+			[Bindable]
+			[Inject]
+			public var manager:ContactManager;
+			
+			[Init]
+			public function injectDone():void
+			{
+				trace(manager);
+			}
+			
+			protected function cancel(event:MouseEvent):void
+			{
+				navigator.popView();
+			}
+			/*
+			protected function save(event:MouseEvent):void
+			{				
+				var contact:Contact = new Contact();
+				contact.firstname = firstnameInput.text;
+				contact.lastname = lastnameInput.text;
+				contact.email = emailInput.text;
+				
+				manager.addContact(contact);
+				
+				navigator.popView();
+			}
+			*/
+			
+			[MessageDispatcher]
+			public var dispatcher:Function;
+			protected function saveContact(event:MouseEvent):void
+			{
+				var contact:Contact = new Contact();
+				contact.firstname = firstnameInput.text;
+				contact.lastname = lastnameInput.text;
+				contact.email = emailInput.text;
+				dispatcher(new AddContactsMessage(contact));
+			}
+			
+			[CommandResult]
+			public function afterSave(event:ResultEvent, trigger:AddContactsMessage):void
+			{
+				navigator.popView();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	
+	<s:navigationContent>
+		<s:Button label="Annuler" click="cancel(event)"/>
+	</s:navigationContent>
+	<s:actionContent>
+		<s:Button label="OK" click="saveContact(event)"/>
+	</s:actionContent>
+
+	<s:TextInput id="firstnameInput" y="10" left="10" right="10" prompt="Prénom"/>
+	<s:TextInput id="lastnameInput" y="50" left="10" right="10" prompt="Nom"/>
+	<s:TextInput id="emailInput" y="100" left="10" right="10" prompt="Email"/>
+	
+	
+</s:View>

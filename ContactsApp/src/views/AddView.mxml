@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="AddView"
+		xmlns:components="com.baao.components.*" xmlns:mx="library://ns.adobe.com/flex/mx" >
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="left" paddingBottom="5" paddingLeft="10"
+						  paddingRight="10" paddingTop="5" />
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import domain.Model;
+			
+			import mx.collections.ArrayCollection;
+			import mx.states.AddItems;
+			import mx.states.OverrideBase;
+			protected function back(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.popView();
+			}
+			
+			protected function save(event:MouseEvent):void
+			{
+				//domain.Model.getModel().contacts.addItem({firstname: firstnameInput.text, lastname: lastnameInput.text, email: emailInput.text});
+				Model.getModel().saveContact(firstnameInput.text, lastnameInput.text, emailInput.text, "photos/ajones.jpg");
+				navigator.popView();
+			}
+			
+			override public function createReturnObject():Object {
+				var contact:Object = new Object();
+				//contact.firstname = firstname;
+				//contact.lastname = lastname;
+				//contact.email = email;
+				
+				return contact;
+			}
+			
+			protected function takePhoto(event:MouseEvent):void
+			{
+				if (CameraUI.isSupported)
+				{
+					var cam:CameraUI = new CameraUI();
+					cam.addEventListener(MediaEvent.COMPLETE, roll_selectHandler);
+					cam.launch(MediaType.IMAGE);
+				}
+			}
+			
+			protected function roll_selectHandler(event:MediaEvent):void
+			{
+				var promise:MediaPromise = event.data as MediaPromise;
+				var loader:Loader = new Loader();
+				
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onImageLoaded);
+				loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, onError);
+				loader.loadFilePromise(promise);
+			}
+			public function onImageLoaded(event:Event):void 
+			{
+				imageContainer.addChild(event.currentTarget.content);
+			}	
+			public function onError(event:IOErrorEvent):void 
+			{
+				trace("Error");
+			}	
+		]]>
+	</fx:Script>
+	
+	<s:titleContent>
+		<s:Label text="Nouveau" color="white" />
+	</s:titleContent>
+	<s:titleLayout>
+		<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:titleLayout>
+	
+	<s:navigationContent>
+		<s:Button label="Back" click="back(event)" />
+	</s:navigationContent>
+	<s:actionContent>
+		<s:Button label="OK" click="save(event)" />
+	</s:actionContent>
+	
+	<s:Spacer top="5" />
+	
+	<s:Label text="Firstname" />
+	<s:TextInput id="firstnameInput" prompt="Prénom" width="100%" />
+	
+	<s:Spacer top="5" />
+	
+	<s:Label text="Lastname" />
+	<s:TextInput id="lastnameInput" prompt="Nom" width="100%" />
+	
+	<s:Spacer top="5" />
+	
+	<s:Label text="Email" />
+	<s:TextInput id="emailInput" prompt="Email" width="100%" />
+	
+	<s:Button label="Photo" click="takePhoto(event)" />
+	
+	<s:Scroller width="100%" height="100%">
+		<s:Group>
+			<mx:UIComponent id="imageContainer" width="300" height="150"/>
+		</s:Group>
+	</s:Scroller>
+</s:View>

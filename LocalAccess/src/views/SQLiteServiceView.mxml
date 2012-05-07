@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="SQLiteServiceView"
+		viewActivate="loadNoteFromSQLite(event)">
+	
+	<s:actionContent>
+		<s:Button label="Add" click="writeNoteToSQLite(event)" />
+	</s:actionContent>
+	
+	<fx:Script>
+		<![CDATA[
+			import spark.events.ViewNavigatorEvent;
+						
+			// "SELECT noteId, modificationDate, text FROM Note ORDER BY noteId"
+			// "INSERT INTO Note (modificationDate, text) VALUES (:modificationDate, :text)"
+			
+			protected function loadNoteFromSQLite(event:ViewNavigatorEvent):void
+			{
+			}			
+			
+			private function writeNoteToSQLite(event:MouseEvent):void 
+			{
+			}			
+		]]>
+		
+	</fx:Script>
+	<s:TextArea id="noteArea" 
+				top="0" left="0" right="0" bottom="0" />
+</s:View>

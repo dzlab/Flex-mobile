@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graphic version="2.0" xmlns="http://ns.adobe.com/fxg/2008" viewHeight= "43" viewWidth= "146"
+	scaleGridLeft="10" scaleGridTop="10" scaleGridRight="136" scaleGridBottom="33">
+	<!-- Outer Border -->
+	<Path data="M 6 1 C 6 1 140 1 140 1 C 143 1 145 3 145 6 C 145 6 145 37 145 37 C 145 40 143 42 140 42 C 140 42 6 42 6 42 C 3 42 1 40 1 37 C 1 37 1 6 1 6 C 1 3 3 1 6 1 Z ">
+		<fill>
+        <LinearGradient x="61.4995" y="0" scaleX="44.0005" rotation="90">
+          <GradientEntry ratio="0" color="#B66B75"/>
+          <GradientEntry ratio="0.5" color="#A22E3A"/>
+          <GradientEntry ratio="0.5" color="#9D1C20"/>
+          <GradientEntry ratio="1" color="#A51E22"/>
+        </LinearGradient>
+		</fill>
+	</Path>
+</Graphic>

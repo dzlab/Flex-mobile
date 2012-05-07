@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		title="HomeView" xmlns:renderers="renderers.*">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			[Bindable]
+			private var emps:ArrayCollection = new ArrayCollection
+				(
+					[
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"}
+					]
+				)			
+			
+			protected function gotoDetail(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				navigator.pushView(DetailView, list.selectedItem);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:List id="list" top="0" left="0" right="0" bottom="0"
+			dataProvider="{emps}" itemRenderer="renderers.ContactRenderer" click="gotoDetail(event)" useVirtualLayout="false" />
+				
+<!--	<s:List id="list" top="0" left="0" right="0" bottom="0"
+			dataProvider="{emps}" itemRenderer="renderers.CheckboxItemRenderer" labelField="firstname" 
+			allowMultipleSelection="true" />
+-->
+</s:View>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="HomeView"
+		viewActivate="loadData(event)">
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			import spark.events.ViewNavigatorEvent;
+			
+			protected function loadData(event:ViewNavigatorEvent):void
+			{
+				// delegate the reponse management to the CallResponder, thus the result is no longer linked to the service but to the token
+				serviceResult.token = service.send();
+			}
+			
+			[Bindable]
+			private var films:ArrayCollection;
+			
+			protected function resultHandler(event:ResultEvent):void
+			{
+				films = event.result.films.film;
+			}
+			
+			protected function faultHandler(event:FaultEvent):void
+			{
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		
+		<s:CallResponder id="serviceResult"  
+						 result="resultHandler(event)" 
+						 fault="faultHandler(event)" />
+		
+		<s:HTTPService id="service" url="http://baao.com/data/films.xml" />
+	</fx:Declarations>
+
+	<s:List id="list" top="0" bottom="0" left="0" right="0" dataProvider="{films}" labelField="name" />
+	
+</s:View>

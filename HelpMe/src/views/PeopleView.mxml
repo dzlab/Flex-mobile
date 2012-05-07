@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="PeopleView">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:titleContent>
+		<s:Label text="People" color="white"/>
+	</s:titleContent>
+	<s:titleLayout>
+		<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:titleLayout>
+	
+	<s:actionContent>
+		<s:Image width="50" height="50" smooth="true" source="@Embed('assets/people.png')"/>
+	</s:actionContent>
+	
+	<s:navigationContent>
+		<s:Button label="Back" />
+	</s:navigationContent>
+	<s:VGroup left="10" right="10" top="10" bottom="10">
+		<s:Image width="100%" smooth="true" source="@Embed('assets/people_quality.PNG')"/>
+		
+		<s:TextInput width="100%" prompt="Search"/>
+		<s:Image width="100%" smooth="true" source="@Embed('assets/line.PNG')"/>
+		<s:HGroup width="100%">
+			
+			<s:Image smooth="true" source="@Embed('assets/Medical-Nurse-Male-Light-icon.png')"/>
+			<s:VGroup left="10" right="10" top="10" bottom="10">
+			
+				<s:Label fontSize="20" text="Doe John"/>
+				<s:Label fontSize="14" text="New York"/>
+				<s:Image width="128" height="20" smooth="true" source="@Embed('assets/quality2.PNG')"/>
+			</s:VGroup>
+			<s:HGroup height="100%" width="100%" horizontalAlign="right">
+				<s:Image height="100%" smooth="true" source="@Embed('assets/arrow.png')" horizontalAlign="right"/>	
+			</s:HGroup>			
+		</s:HGroup>		
+		
+		<s:Image width="100%" smooth="true" source="@Embed('assets/line.PNG')" />
+		
+		<s:HGroup width="100%">
+			
+			<s:Image smooth="true" source="@Embed('assets/administrator-icon.png')"/>
+			<s:VGroup left="10" right="10" top="10" bottom="10">
+				
+				<s:Label fontSize="20" text="Bob75"/>
+				<s:Label fontSize="14" text="New York"/>
+				<s:Image width="128" height="20" smooth="true" source="@Embed('assets/quality1.PNG')"/>
+			</s:VGroup>
+			<s:HGroup height="100%" width="100%" horizontalAlign="right">
+				<s:Image height="100%" smooth="true" source="@Embed('assets/arrow.png')" horizontalAlign="right"/>	
+			</s:HGroup>	
+		</s:HGroup>
+		<s:Image width="100%" smooth="true" source="@Embed('assets/line.PNG')"/>
+
+	</s:VGroup>
+	
+</s:View>

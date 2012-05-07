@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:controls="com.baao.controls.*">
+	<fx:Script>
+		<![CDATA[
+			private function startCam():void
+			{
+				var myCam:Camera = Camera.getCamera();
+				if (myCam != null)
+				{
+					myCam.setMode(640, 480, 20);
+					player.attachCamera(myCam);
+				}
+			}
+		]]>
+	</fx:Script>
+	<s:Button top="10" label="Cam" click="startCam()" horizontalCenter="0"/>
+	<controls:UIVideo id="player" top="98" width="320" height="240"
+					  horizontalCenter="0"/>
+</s:Application>

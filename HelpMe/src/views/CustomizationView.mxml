@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="CustomizationView">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:titleContent>
+		<s:Label text="Customization" color="white"/>
+	</s:titleContent>
+	<s:titleLayout>
+		<s:HorizontalLayout horizontalAlign="center" verticalAlign="middle"/>
+	</s:titleLayout>
+	
+	<s:actionContent>
+		<s:Image width="50" height="50" smooth="true" source="@Embed('assets/tools.png')"/>
+	</s:actionContent>
+	
+	<s:navigationContent>
+		<s:Button label="Back" />
+	</s:navigationContent>
+	<s:VGroup left="10" right="10" top="10" bottom="10">
+		<s:CheckBox label="Start camera" />
+		<s:CheckBox label="Start microphone" />
+		<s:CheckBox label="Start camera flash" />
+		<s:CheckBox label="Play an alarm" />
+		
+		
+	</s:VGroup>
+	
+</s:View>

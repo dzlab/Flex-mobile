@@ -1,0 +1,34 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+
+
+global
+{
+	chromeColor: #294867;
+	contentBackgroundColor: #7da0c3;
+	symbolColor: #000000;
+	rollOverColor: #881111;
+	selectionColor: #7da0c3;
+	focusColor: #333333;
+	accentColor: #000000;
+	fontFamily: 'Verdana';
+}
+
+s|ActionBar
+{
+	chromeColor: #294867;
+	contentBackgroundColor: #39628C;
+	titleAlign:center;
+}
+s|ActionBar #titleDisplay
+{
+	fontFamily: 'Verdana';
+	
+}
+s|TabbedViewNavigator #tabBar 
+{
+	chromeColor: #294867;
+	fontFamily: 'Verdana';
+	
+	
+}

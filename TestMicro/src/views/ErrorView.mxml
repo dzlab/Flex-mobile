@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" styleName="list">
+
+	<fx:Metadata>
+		[Event(name="close")]
+	</fx:Metadata>
+	
+	<s:RichText id="message" top="10" bottom="10" left="10" right="10" text="Sorry, an error has occured in your application"
+				horizontalCenter="0"
+				verticalCenter="0" textAlign="center" verticalAlign="middle"/>
+	
+	<s:Button label="OK" left="10" right="10" bottom="10" height="50"
+			  click="dispatchEvent(new Event('close'))"/>
+
+</s:SkinnableContainer>

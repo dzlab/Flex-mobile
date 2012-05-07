@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		title="HomeView"
+		viewActivate="traceSize(event)">
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.sampler.getSize;
+			
+			import mx.collections.ArrayCollection;
+			
+			import spark.events.ViewNavigatorEvent;
+			[Bindable]
+			private var emps:ArrayCollection = new ArrayCollection
+				(
+					[
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"},
+						{firstname:"Ricardo", lastname:"Alvares", photo:"photos/ajones.jpg", title:"Chief"},
+						{firstname:"Benjamin", lastname:"Grandet", photo:"photos/bandrews.jpg", title:"Développeur"},
+						{firstname:"Cédric", lastname:"Léonard", photo:"photos/bsmith.jpg", title:"Graphiste"},
+						{firstname:"Yann", lastname:"Chevrier", photo:"photos/djackson.jpg", title: "Consultant"}
+					]
+				)
+				
+			protected function traceSize(event:ViewNavigatorEvent):void
+			{
+				sizeLabel.text = getSize(this) + " Octets";
+			}
+			
+		]]>
+	</fx:Script>
+	<s:List id="list" left="0" right="0" top="0" bottom="50"
+			labelField="firstname" dataProvider="{emps}" 
+			useVirtualLayout="true">
+		<s:itemRenderer>
+			<fx:Component>
+				<s:ItemRenderer cacheAsBitmap="true" opaqueBackground="0xFFFFFF">
+					<fx:Script>
+						<![CDATA[
+							import spark.core.ContentCache;
+							public static const cache:ContentCache = new ContentCache();
+						]]>
+					</fx:Script>
+					<s:layout>
+						<s:HorizontalLayout verticalAlign="middle"
+											paddingTop="5" paddingBottom="5" paddingLeft="10" paddingRight="10"/>
+					</s:layout>
+					<s:Image source="{data.photo}" width="60" height="60"
+							 contentLoader="{cache}"/>
+					<s:VGroup width="100%" height="100%"
+							  horizontalAlign="left" verticalAlign="middle" gap="15">
+						<s:Label text="{data.firstname} - {data.lastname}" />
+						<s:Label text="{data.title}" />
+					</s:VGroup>
+					<s:Image source="@Embed('assets/arrow.png')" />
+				</s:ItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+	</s:List>
+
+	<!--	
+	<s:List id="list" left="0" right="0" top="0" bottom="50"
+			labelField="firstname" dataProvider="{emps}" 
+			useVirtualLayout="true">
+		<s:itemRenderer>
+			<fx:Component>
+				<s:IconItemRenderer label="{data.firstname} - {data.lastname}"
+									messageField="title"
+									iconField="photo" iconWidth="60" iconHeight="60"
+									decorator="@Embed('assets/arrow.png')" creationComplete="countCreation(event)">
+					<fx:Script>
+						<![CDATA[
+							import flash.sampler.getSize;
+							
+							import mx.events.FlexEvent;
+							
+							private static var instanceCount:int=0;
+							
+							protected function countCreation(event:FlexEvent):void
+							{
+								trace(++instanceCount);
+							}
+							
+						]]>
+					</fx:Script>
+					
+				</s:IconItemRenderer>
+			</fx:Component>
+		</s:itemRenderer>
+	</s:List>
+-->
+	<!--	<s:Label bottom="10" horizontalCenter="0" text="Sél : {list.selectedItem.firstname}"/> -->
+	<s:Label bottom="10" horizontalCenter="0" id="sizeLabel"/>
+</s:View>

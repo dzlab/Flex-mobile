@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" 
+		title="BaaO Browser"
+		viewActivate="viewActivateHandler(event)"
+		viewDeactivate="viewDeactivateHandler(event)">
+	
+	<s:titleContent>
+		<s:TextInput id="urlInput" prompt="Votre URL" enter="navigate(event)" width="100%"/>
+	</s:titleContent>
+	<fx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import spark.events.ViewNavigatorEvent;
+			
+			private var browser:StageWebView;
+			
+			protected function viewActivateHandler(event:ViewNavigatorEvent):void
+			{
+				browser = new StageWebView();
+				browser.stage = stage;
+				
+				// we have to del
+				var pt:Point = contentToGlobal(new Point(0,0));
+				var browserRect:Rectangle = new Rectangle(0, pt.y, width, height);
+				browser.viewPort = browserRect;
+			}
+			
+			//the browser rectangle is not part of stage, it's StageWebView, 
+			// so we have to delete this space manually when the view is desactivated
+			protected function viewDeactivateHandler(event:ViewNavigatorEvent):void
+			{
+				browser.viewPort = null;
+				browser.dispose();
+				browser = null;
+			}
+			
+			protected function navigate(event:FlexEvent):void
+			{
+				trace("navigate...");
+				browser.loadURL(urlInput.text);
+			}
+						
+		]]>
+	</fx:Script>
+</s:View>
